@@ -1,0 +1,115 @@
+# Extensions for JavaScript
+ESLint & Prettier - Code formatter 
+format on save, semi, single quote, …    [.prettierrc]
+HTML: Ctrl+Shift+P > Format Document with.. > Prettier
+JavaScript(ES6) code snippets
+(ES7 React/Redux/GraphQL/React-Native snippets)
+- imp, clg, nfn, fre, ...
+Turbo Console Log (Ctrl+Option+L) 
+Settings, settings.json, Keyboard Shortcuts
+Option+Shift+C, Option+Shift++U, Option+Shift+D
+ESLint                 eslint-config-airbnb
+$> npm i eslint -g   (mac: sudo)
+$> npm i -D eslint ⇒ ./node_modules/eslint/bin/eslint.js --init
+
+$> npm init -y
+$> npm i -D prettier eslint-plugin-prettier eslint-config-prettier
+
+# not need react
+$> npx install-peerdeps --dev eslint-config-airbnb-base
+$> npm i -D eslint-config-airbnb
+
+# need react (warning: react-hook need eslint@6.0)
+$> npx install-peerdeps --dev eslint-config-airbnb
+(if `ERR undefined`, npm info "eslint-config-airbnb@latest" peerDependencies)
+
+# need node
+$> npm i -D eslint-plugin-node eslint-config-node
+
+
+$> eslint --init
+⇒ .eslintrc.js                      airbnb-style-guide
+"extends":["airbnb", "prettier", "plugin:react/recommended"],
+"plugins": ["react", "prettier"],
+"rules": {
+	quotes: ['error', 'single'],
+"no-unused-vars": "warn",
+"prettier/prettier": "error",
+"no-console": "off",
+"func-names": "off",
+"object-shorthand": "off",
+"class-methods-use-this": "off",
+}
+
+// .eslintrc.js
+
+
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'airbnb',
+    'prettier',
+    'plugin:react/recommended',
+  ],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
+  plugins: ['react', 'prettier'],
+  rules: {
+    quotes: ['error', 'single'],
+    'no-unused-vars': 'warn',
+    'no-console': 'off',
+    'func-names': 'off',
+    'object-shorthand': 'off',
+    'class-methods-use-this': 'off',
+  },
+};
+// .prettierrc
+
+
+{
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "semi": true,
+  "trailingComma": "es5",
+  "arrowParens": "avoid"
+}
+
+# Other Extensions
+GitLens, Git History, import cost,
+Version Lens: npm version checker,
+Live Share, Debugger for Chrome,
+Quokka.js, Settings Sync,
+GraphQL, Appolo GraphQL,
+Vetur, Angular v7 Snippets,
+SVG Previewer,
+CSS Grid Snippets,
+CSS Flexbox CheatSheet
+
+
+# Tip: Keyboard Shortcuts
+Ctrl(Cmd)+P   (cf, Cmd+Shift+P)
+Ctrl(Cmd)+W
+Cmd+Shift+E
+Cmd+Shift+F   (cf, Ctrl+Shift+G)
+Cmd+Shift+T
+Cmd+Alt+(← or →) (cf.Cmd+Shift+[] or Cmd+Tab)
+Cmd+B         (cf. Cmd+J or Ctrl+` or Cmd+Y)
+Cmd+\     (cf. Cmd+/)
+Cmd+D      (cf. Cmd+Shift+L) (cf. Cmd+F)
+Cmd+,      
+Alt+(Up/Down)
+Alt+Shift+(Up/Down)
+Cmd+Shift+([])  (cf. Tab or Shift+Tab)
+Cmd+K Cmd+L      (cf. Cmd+K Cmd+Q)
+Cmd+(+ or - or 0)
+F2  (cf. F12, Alt+Click)
