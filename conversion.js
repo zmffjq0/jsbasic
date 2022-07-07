@@ -28,7 +28,9 @@ const u = { id: 1, name: 'hong' };
 console.log(typeof u.toString());
 
 r = x + '30';
+r = x + +'30'; // 두번째 + => 부호연산자로 후에 나오는 문자를 숫자로 생각한다
 q = x * '30';
+
 console.log(r, typeof r, q, typeof q);
 
 let a = 1,
@@ -123,6 +125,13 @@ for (let i = 2; i <= 10; i++) {
   }
 }
 
+for (let i = 2; i <= 10; i++) {
+  const x = Math.sqrt(i).toFixed(3);
+  if (x - parseInt(x) != 0) {
+    console.log(i, x);
+  }
+}
+
 console.log('===================================');
 
 const today = new Date();
@@ -167,3 +176,7 @@ const dayList2 = ['일', '월', '화', '수', '목', '금', '토'];
 console.log(`오늘은 ${dayList[day]}요일입니다.`);
 console.log('===================================');
 console.log(`오늘은 ${dayList2[day]}요일입니다.`);
+
+console.log('===================================');
+const dayList3 = '일월화수목금토'; // 배열보다 가벼움(원시타입)
+console.log(dayList3[day]);
