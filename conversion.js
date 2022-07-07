@@ -114,10 +114,56 @@ console.log('name' in i);
 class Dog {}
 const d = new Dog();
 console.log(d instanceof Dog);
+console.log('===================================');
 
 for (let i = 2; i <= 10; i++) {
   const x = Math.sqrt(i);
-  if (x !== 2 && x !== 3) {
-    console.log(x.toFixed(3));
+  if (!Number.isInteger(x)) {
+    console.log(i, x.toFixed(3));
   }
 }
+
+console.log('===================================');
+
+const today = new Date();
+const day = today.getDay();
+switch (day) {
+  case 0:
+    console.log('오늘은 일요일입니다.');
+    break;
+  case 1:
+    console.log('오늘은 월요일입니다.');
+    break;
+  case 2:
+    console.log('오늘은 화요일입니다.');
+    break;
+  case 3:
+    console.log('오늘은 수요일입니다.');
+    break;
+  case 4:
+    console.log('오늘은 목요일입니다.');
+    break;
+  case 5:
+    console.log('오늘은 금요일입니다.');
+    break;
+  default:
+    console.log('오늘은 토요일입니다.');
+    break;
+}
+console.log('===================================');
+
+const dayList = {
+  0: '일',
+  1: '월',
+  2: '화',
+  3: '수',
+  4: '목',
+  5: '금',
+  6: '토',
+};
+
+const dayList2 = ['일', '월', '화', '수', '목', '금', '토'];
+
+console.log(`오늘은 ${dayList[day]}요일입니다.`);
+console.log('===================================');
+console.log(`오늘은 ${dayList2[day]}요일입니다.`);
