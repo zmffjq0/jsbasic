@@ -37,3 +37,5 @@ console.log(u.age, typeof u);
 const j = 5;
 console.log(3 - -j);
 console.log(10 - j * -2);
+
+console.log(global)
