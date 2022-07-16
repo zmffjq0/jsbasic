@@ -4,6 +4,7 @@ const kim2 = {
   addr: { id: 1, name: 'Hong', addr: { city: 'Seoul', arr: [1, 2, 3] } },
   ids: [{ id: 1 }, { id: 2 }],
   fc: function () {
+    console.log('Hello#############');
     return True;
   },
 };
@@ -14,6 +15,7 @@ const kim3 = [
   { id: 1, name: 'Hong', addr: { city: 'Seoul', arr: [1, 2, 3] } },
   [{ id: 1 }, { id: 2 }],
   function fc() {
+    console.log('Hello#############');
     return True;
   },
 ];
@@ -35,6 +37,10 @@ const kim3 = [
 const newKim2 = deepCopyObject(kim2);
 newKim2.ids[0].id = 100;
 // newKim2.fc = 'bbbb';
+newKim2.fc = function () {
+  console.log('Hello @@@@@@@@@@@@@@@@@');
+};
+newKim2.fc();
 console.log('----------------------');
 console.log(kim2);
 console.log('----------------------');
