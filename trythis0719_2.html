@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <button id="btn1">국어 수업 요일선택</button>
+      <span id="korday">요일을 선택하세요!</span>
+    </div>
+    <div>
+      <button id="btn2">수학 수업 요일선택</button>
+      <span id="mathday">요일을 선택하세요!</span>
+    </div>
+
+    <script>
+      window.addEventListener('load', () => {
+        const weekends = ['일', '월', '화', '수', '목', '금', '토'];
+        const $btn1 = document.getElementById('btn1');
+        const $btn2 = document.getElementById('btn2');
+        const kor = document.querySelector('#korday');
+        const math = document.querySelector('#mathday');
+        let kornum = 0;
+        let mathnum = 0;
+        $btn1.addEventListener('click', function (event) {
+          kor.innerText = `${weekends[kornum]}`;
+          kornum = (kornum + 1) % 7;
+        });
+
+        $btn2.addEventListener('click', (event) => {
+          math.innerText = `${weekends[mathnum]}`;
+          mathnum = (mathnum + 1) % 7;
+        });
+      });
+    </script>
+  </body>
+</html>
