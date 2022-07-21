@@ -16,6 +16,15 @@ const getNextWeek = (() => {
   };
 })();
 
+function updateDay(e) {
+  if (e.target.className === 'addDay') {
+    const id = e.target.id;
+    const span = document.querySelector(`span#${id}`);
+    const idx = id.substr(4);
+    span.innerText = getNextWeek(idx, e);
+  }
+}
+
 const getId = (() => {
   let id = -1;
   return () => {
@@ -28,7 +37,7 @@ list.addEventListener('click', (e) => {
   updateDay(e);
 });
 
-addBtn.addEventListener('click', (e) => {
+addBtn.addEventListener('click', () => {
   addItem();
 });
 
@@ -37,7 +46,6 @@ function createItem(text) {
   item.className = 'item';
   const id = getId();
   item.innerHTML = itemTemplate(id, text);
-
   return item;
 }
 
@@ -45,15 +53,6 @@ function addItem() {
   const value = inputBox.value;
   const div = createItem(value);
   list.appendChild(div);
-}
-
-function updateDay(e) {
-  if (e.target.className === 'addDay') {
-    const id = e.target.id;
-    const span = document.querySelector(`span#${id}`);
-    const idx = id.substr(4);
-    span.innerText = getNextWeek(idx, e);
-  }
 }
 
 function itemTemplate(id, text) {
