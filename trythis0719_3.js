@@ -1,4 +1,4 @@
-const getTotalValue = function (arr, func, prev) {
+const reduce = (arr, func, prev) => {
   if (arr.length === 0 && prev === undefined) {
     throw new Error('원소 없음');
   }
@@ -23,21 +23,21 @@ const arr3 = [2, 2, 2];
 const arr4 = ['a', 'b', 'c', 4, 'f'];
 const arr5 = [-1, -4, 'a', 0, 'a', 'b'];
 
-console.log(getTotalValue(arr1, (a, b) => a + b, 0));
-console.log(getTotalValue(arr2, (a, b) => a + b));
-// console.log(getTotalValue([], (a, b) => a + b));
-console.log(getTotalValue(arr2, (a, b) => a * b, 1));
-console.log(getTotalValue(arr3, (a, b) => a * b));
-console.log(getTotalValue(arr4, (a, b) => a + b));
-console.log(getTotalValue(arr4, (a, b) => a + b, 'if'));
-console.log(getTotalValue([9999], (a, b) => a * b, 0));
-console.log(getTotalValue(arr5, (a, b) => a + b));
-console.log(getTotalValue(arr5, (a, b) => a * b));
-console.log(getTotalValue(arr1, (a, b) => a / b));
+console.log(reduce(arr1, (a, b) => a + b, 0));
+console.log(reduce(arr2, (a, b) => a + b));
+// console.log(reduce([], (a, b) => a + b));
+console.log(reduce(arr2, (a, b) => a * b, 1));
+console.log(reduce(arr3, (a, b) => a * b));
+console.log(reduce(arr4, (a, b) => a + b));
+console.log(reduce(arr4, (a, b) => a + b, 'if'));
+console.log(reduce([9999], (a, b) => a * b, 0));
+console.log(reduce(arr5, (a, b) => a + b));
+console.log(reduce(arr5, (a, b) => a * b));
+console.log(reduce(arr1, (a, b) => a / b));
 console.log([].reduce((a, b) => a + b, 0));
 console.log(
   //like filter
-  getTotalValue(
+  reduce(
     //
     [1, 2, 3],
     (acc, cur) => {
@@ -48,7 +48,7 @@ console.log(
   )
 );
 console.log(
-  getTotalValue(
+  reduce(
     [1, 2, 3],
     (acc, cur) => {
       acc.push(cur % 2 ? '홀수' : '짝수');
