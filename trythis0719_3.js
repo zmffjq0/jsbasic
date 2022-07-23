@@ -24,7 +24,6 @@ const reduce2 = (arr, func, prev) => {
     throw new Error('Array is empty!!');
   }
   let i = 0;
-  x;
   prev = prev ?? ((i += 1), arr[0]);
   let curr = prev;
   for (; i < arr.length; i++) {
