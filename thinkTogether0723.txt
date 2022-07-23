@@ -1,13 +1,14 @@
 1. 함수가 갖는 의미는?
-프로그램 내에서 특정한 기능을 담당한다.
+프로그램 내에서 특정한 기능을 담당하는 객체이다.
 
 2. 함수는 작게? 얼마나 작게? 확장을 고려한 함수란?
-함수는 
+작게의 기준은 개인별 차이가 있겠지만, 보편적으로 하나의 함수가 하나의 화면을 넘어가지 않는 수준이 맥시멈이다. 확장을 고려한 함수이려면 매개변수에 어떤 것이 들어와도 논리에 맞는 올바른 값을 도출해내거나 혹은 동일한 실행을 해내야한다.
 
 3. 함수 이름 규칙은 어떻게 만들까? 동사시작, 직관적/기억
 // getX, setX, isX, hasX, useX, sum, avg, fetchX, sendX, findX, addX, updateX, deleteX, destroyX, willX, didX, onX, query, searchX, etc 너무 길지않게 직관적으로!
 
 4. 왜 `순수 함수`를 추구해야 하나?
+데이터의 오염을 막기 위해 순수함수로 구현해야한다.
 
 5. this는 자유롭게 사용해도 될까? instance arr = new Array([1, 2, 3])
 Array.prototype.push.call(obj, 1) = arr.push(1)
