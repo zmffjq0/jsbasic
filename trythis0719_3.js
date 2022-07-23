@@ -24,8 +24,7 @@ const reduce2 = (arr, func, prev) => {
     throw new Error('Array is empty!!');
   }
   let i = 0;
-  prev = prev ?? ((i += 1), arr[0]);
-  let curr = prev;
+  let curr = prev ?? ((i += 1), arr[0]);
   for (; i < arr.length; i++) {
     curr = func(curr, arr[i]);
   }
@@ -52,88 +51,109 @@ const reduce3 = (arr, func, prev) => {
   return curr;
 };
 
-const arr1 = [1, 0, 2, 3];
-const arr2 = [1, 2, 3, 4, 5];
-const arr3 = [2, 2, 2];
-const arr4 = ['a', 'b', 'c', 4, 'f'];
-const arr5 = [-1, -4, 'a', 0, 'a', 'b'];
-const arr6 = [0, '0', 1, 2, 3];
+// Test Case
+const assertReduce = (arr, func, prev) => {
+  const myReduce = reduce(arr, func, prev);
+  const expVal = arr.reduce(func, prev);
+  console.log(arr, `${func}, ${prev} ==> ${myReduce === expVal}`);
+};
+assertReduce([1, 2, 3], (a, b) => a + b, 0);
+assertReduce([1, 2, 3], (a, b) => a, undefined);
 
-// console.log('reduce => *******************************************');
+// 두개가 왜 다를까?
 console.log(
-  arr6,
-  reduce3(arr6, (a, b) => a + b, 0)
+  [1, 2, 3].reduce((a, b) => a),
+  '!!'
 );
 console.log(
-  arr1,
-  reduce3(arr1, (a, b) => a + b, 0)
+  [1, 2, 3].reduce((a, b) => a, undefined),
+  '!!'
 );
-console.log(
-  arr2,
-  reduce3(arr2, (a, b) => a + b)
-);
+// !!
+
+console.log(undefined);
+// const arr1 = [1, 0, 2, 3];
+// const arr2 = [1, 2, 3, 4, 5];
+// const arr3 = [2, 2, 2];
+// const arr4 = ['a', 'b', 'c', 4, 'f'];
+// const arr5 = [-1, -4, 'a', 0, 'a', 'b'];
+// const arr6 = [0, '0', 1, 2, 3];
+
+// // console.log('reduce => *******************************************');
 // console.log(
-//   undefined,
-//   reduce3(undefined, (a, b) => a + b, 1)
+//   arr6,
+//   reduce3(arr6, (a, b) => a + b, 0)
 // );
-// console.log([].arr, reduce3((a, b) => a + b, 0));
-console.log(
-  arr2,
-  reduce3(arr2, (a, b) => a * b, 1)
-);
-console.log(
-  arr3,
-  reduce3(arr3, (a, b) => a * b)
-);
-console.log(
-  arr4,
-  reduce3(arr4, (a, b) => a + b)
-);
-console.log(
-  arr4,
-  reduce3(arr4, (a, b) => a + b, 'if')
-);
-console.log(
-  [9999],
-  reduce3([9999, 3999], (a, b) => a * b, 0)
-);
-console.log(
-  arr5,
-  reduce3(arr5, (a, b) => a + b)
-);
-console.log(
-  arr5,
-  reduce3(arr5, (a, b) => a * b)
-);
-console.log(
-  arr1,
-  reduce3(arr1, (a, b) => a / b)
-);
-// console.log([].reduce3((a, b) => a + b, 0));
-console.log(
-  [1, 2, 3],
-  //like filter
-  reduce3(
-    //
-    [1, 2, 3],
-    (acc, cur) => {
-      if (cur % 2) acc.push(cur);
-      return acc;
-    },
-    []
-  )
-);
-console.log(
-  [1, 2, 3],
-  reduce(
-    [1, 2, 3],
-    (acc, cur) => {
-      acc.push(cur % 2 ? '홀수' : '짝수');
-      return acc;
-    },
-    []
-  )
-);
+// console.log(
+//   arr1,
+//   reduce3(arr1, (a, b) => a + b, 0)
+// );
+// console.log(
+//   arr2,
+//   reduce3(arr2, (a, b) => a + b)
+// );
+// // console.log(
+// //   undefined,
+// //   reduce3(undefined, (a, b) => a + b, 1)
+// // );
+// // console.log([].arr, reduce3((a, b) => a + b, 0));
+// console.log(
+//   arr2,
+//   reduce3(arr2, (a, b) => a * b, 1)
+// );
+// console.log(
+//   arr3,
+//   reduce3(arr3, (a, b) => a * b)
+// );
+// console.log(
+//   arr4,
+//   reduce3(arr4, (a, b) => a + b)
+// );
+// console.log(
+//   arr4,
+//   reduce3(arr4, (a, b) => a + b, 'if')
+// );
+// console.log(
+//   [9999],
+//   reduce3([9999, 3999], (a, b) => a * b, 0)
+// );
+// console.log(
+//   arr5,
+//   reduce3(arr5, (a, b) => a + b)
+// );
+// console.log(
+//   arr5,
+//   reduce3(arr5, (a, b) => a * b)
+// );
+// console.log(
+//   arr1,
+//   reduce3(arr1, (a, b) => a / b)
+// );
+// // console.log([].reduce3((a, b) => a + b, 0));
+// console.log(
+//   [1, 2, 3],
+//   //like filter
+//   reduce3(
+//     //
+//     [1, 2, 3],
+//     (acc, cur) => {
+//       if (cur % 2) acc.push(cur);
+//       return acc;
+//     },
+//     []
+//   )
+// );
+// console.log(
+//   [1, 2, 3],
+//   reduce(
+//     [1, 2, 3],
+//     (acc, cur) => {
+//       acc.push(cur % 2 ? '홀수' : '짝수');
+//       return acc;
+//     },
+//     []
+//   )
+// );
 
 // console.log('reduce2 => *******************************************');
 // console.log(reduce2(arr1, (a, b) => a + b, 0));
