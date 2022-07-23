@@ -189,3 +189,12 @@ console.log(undefined);
 //     []
 //   )
 // );
+
+const arr = [1, 2, 3, 4, 5];
+for (const key in arr) {
+  console.log(key, arr[key]);
+}
+
+for (const i of arr) {
+  console.log(i, arr[i]);
+}
