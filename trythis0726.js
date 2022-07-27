@@ -9,34 +9,30 @@ range(100); // [1, 2, 3, 4, 5, ..., 99, 100]
 
 console.time,
 console.timeEnd
-사용해서 성능 고려해서 코딩해보자
  */
 
 function range(start, end, interval) {
   const len = arguments.length;
+  const isForward = start < end;
   const result = [];
   switch (len) {
     case 0:
       throw new Error('Empty args');
+      return;
     case 1:
       for (let i = 1; i <= start; i++) result.push(i);
-      break;
+      return result;
     case 2:
-      if (start < end) {
-        for (let i = start; i <= end; i++) result.push(i);
-      } else {
-        for (let i = start; i >= end; i--) result.push(i);
-      }
-      break;
+      [start, end] = isForward ? [start, end] : [end, start];
+      for (let i = start; i <= end; i++) result.push(i);
+      return isForward ? result : result.reverse();
     case 3:
-      if (start < end) {
-        for (let i = start; i <= end; i += interval) result.push(i);
-      } else {
-        for (let i = start; i >= end; i += interval) result.push(i);
-      }
-      break;
+      [start, end, interval] = isForward
+        ? [start, end, interval]
+        : [end + ((start - end) % interval), start, -interval];
+      for (let i = start; i <= end; i += interval) result.push(i);
+      return isForward ? result : result.reverse();
   }
-  return result;
 }
 console.time('1st');
 console.log(range(100));
@@ -58,10 +54,30 @@ console.time('5th');
 console.log(range(1, 10, 7));
 console.timeEnd('5th');
 
+console.time('5th');
 console.log(range(1, 10, 2)); // [1, 3, 5, 7, 9]
+console.timeEnd('5th');
+
+console.time('6th');
 console.log(range(1, 10)); // [1, 2, 3, 4,  5, 6, 7, 8, 9, 10]
+console.timeEnd('6th');
+
+console.time('7th');
 console.log(range(10, 1)); // [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+console.timeEnd('7th');
+
+console.time('8th');
 console.log(range(10, 1, -1)); // [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+console.timeEnd('8th');
+
+console.time('9th');
 console.log(range(10, 1, -2)); // [ 10, 8, 6, 4, 2 ]
+console.timeEnd('9th');
+
+console.time('10th');
 console.log(range(5)); // [1, 2, 3, 4, 5]
+console.timeEnd('10th');
+
+console.time('11th');
 console.log(range(100, 57, -8));
+console.timeEnd('11th');
