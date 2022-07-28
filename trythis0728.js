@@ -22,12 +22,13 @@ function makeReverseArray(args) {
   console.log(arr);
 }
 
-// 비순수함수 all 값 변경
 const all = [1, 2, 3, 4, 5, 6];
 const all2 = [1, 2, 3, 4, 5, 6];
-reverseArray(all);
-console.log(all);
 
 // 순수함수 all 변함 없음
 makeReverseArray(all2);
 console.log(all2);
+
+// 비순수함수 all 값 변경
+reverseArray(all);
+console.log(all);
