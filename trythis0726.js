@@ -11,35 +11,58 @@ console.time,
 console.timeEnd
  */
 
-function range(...arg) {
-  let [start, end, interval] = arg;
-  const len = arguments.length;
-  const isForward = start < end;
+// 인자가 primitive 타입인 경우 함수 내에서 Lexical Env Record가 생기기 때문에 함수 내에서 조작하는 것은 상관 없다
+// 인자가 object인 경우 새로 복사해서 사용하자!
+// 숫자와 undefined를 비교시 무조건 false가 나온다
+// 함수 매개변수에 초기값 설정을 사용하자
+
+function range(...args) {
+  const len = args.length;
+  let [start, end, interval] = args;
+
+  let isForward = start < end;
   const result = [];
 
+  if ((start === 0 && len === 1) || start === end) {
+    return [start];
+  }
+  if (
+    interval === 0 ||
+    (isForward && interval < 0) ||
+    (!isForward && interval > 0)
+  ) {
+    return [];
+  }
   switch (len) {
     case 0:
       throw new Error('Empty args');
-      return;
-
     case 1:
-      for (let i = 1; i <= start; i++) result.push(i);
-      return result;
+      (isForward = [start, end, interval] =
+        Math.sign(start) === 1 ? [1, start, 1] : [start, -1, 1]),
+        start < end;
 
+      break;
     case 2:
-      [start, end] = isForward ? [start, end] : [end, start];
-      for (let i = start; i <= end; i++) result.push(i);
-      return isForward ? result : result.reverse();
+      [start, end, interval] = isForward ? [start, end, 1] : [end, start, 1];
+      break;
 
     case 3:
       [start, end, interval] = isForward
         ? [start, end, interval]
         : [end + ((start - end) % interval), start, -interval];
-      for (let i = start; i <= end; i += interval) result.push(i);
-      return isForward ? result : result.reverse();
+      break;
   }
+
+  for (let i = start; i <= end; i += interval) {
+    result.push(i);
+  }
+
+  return isForward ? result : result.reverse();
 }
-console.time('1st');
+
+//-----------------------------------------------------------------
+
+// console.time('1st');
 // console.log(range(100));
 // console.timeEnd('1st');
 
@@ -49,7 +72,7 @@ console.time('1st');
 
 // console.time('3rd');
 // console.log(range(1, 10));
-// console.timeEnd('3th');
+// console.timeEnd('3rd');
 
 // console.time('4th');
 // console.log(range(10, 1, -4));
@@ -62,14 +85,6 @@ console.time('1st');
 // console.time('5th');
 // console.log(range(1, 10, 2)); // [1, 3, 5, 7, 9]
 // console.timeEnd('5th');
-
-// console.time('6th');
-// console.log(range(1, 10)); // [1, 2, 3, 4,  5, 6, 7, 8, 9, 10]
-// console.timeEnd('6th');
-
-// console.time('7th');
-// console.log(range(10, 1)); // [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-// console.timeEnd('7th');
 
 // console.time('8th');
 // console.log(range(10, 1, -1)); // [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
@@ -87,10 +102,42 @@ console.time('1st');
 // console.log(range(100, 57, -8));
 // console.timeEnd('11th');
 
-console.time('12th');
-console.log(range(-1, -10, -4));
-console.timeEnd('12th');
+// console.time('12th');
+// console.log(range(-1, -10, -4));
+// console.timeEnd('12th');
 
-console.time('13th');
-console.log(range(-10, -1, 4));
-console.timeEnd('13th');
+// console.time('13th');
+// console.log(range(-10, -1, 4));
+// console.timeEnd('13th');
+
+// start와 end가 같을 때
+console.log(`// start와 end가 같을 때`);
+console.time('14th');
+console.log(range(5, 5));
+console.timeEnd('14th');
+
+// start와 end가 같을 때 배열 원소 1개 리턴
+console.log(`// start와 end가 같을 때 배열 원소 1개 리턴`);
+console.log(range(5, 5, 0));
+console.log(range(5, 5, -1));
+console.log(range(5, 5, 1));
+
+// 인자가 1개이면서 음수일 때,
+console.log(`// 인자가 1개이면서 음수일 때,`);
+console.log(range(-5));
+
+// interval이 적절하지 않을 때,
+console.log(`// interval이 적절하지 않을 때,`);
+console.log(range(5, 1, 1));
+console.log(range(1, 5, -1));
+console.log(range(1, 5, 6));
+console.log(range(0));
+console.log(range(0, 0));
+console.log(range(0, 0, 5));
+console.log('==============================');
+console.log(range(0, 5));
+console.log(range(0, -1));
+console.log(range(0, -3));
+console.log(range(-3, 0));
+console.log(range(2, 1, -5));
+console.log(range(0, -1, -5));
