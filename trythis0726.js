@@ -15,14 +15,14 @@ console.timeEnd
 // 인자가 object인 경우 새로 복사해서 사용하자!
 // 숫자와 undefined를 비교시 무조건 false가 나온다
 // 함수 매개변수에 초기값 설정을 사용하자
+// 좌측에 할당할 변수가 없다면 널 병합 연산자보다는 차라리 if문을 사용하자 =>
+// 널병합 연산자를 사용할 땐, 할당하도록 하자
 
 function range(...args) {
-  const len = args.length;
+  // ...args 사용 지양 => range 함수의 정확한 기능을 나타내기 위해 매개변수를 명시해주자
   let [start, end, interval] = args;
-
+  const len = args.length;
   let isForward = start < end;
-  const result = [];
-
   if ((start === 0 && len === 1) || start === end) {
     return [start];
   }
@@ -33,19 +33,16 @@ function range(...args) {
   ) {
     return [];
   }
+
   switch (len) {
-    case 0:
-      throw new Error('Empty args');
     case 1:
       (isForward = [start, end, interval] =
         Math.sign(start) === 1 ? [1, start, 1] : [start, -1, 1]),
         start < end;
-
       break;
     case 2:
       [start, end, interval] = isForward ? [start, end, 1] : [end, start, 1];
       break;
-
     case 3:
       [start, end, interval] = isForward
         ? [start, end, interval]
@@ -53,10 +50,10 @@ function range(...args) {
       break;
   }
 
+  const result = [];
   for (let i = start; i <= end; i += interval) {
     result.push(i);
   }
-
   return isForward ? result : result.reverse();
 }
 
@@ -111,23 +108,23 @@ function range(...args) {
 // console.timeEnd('13th');
 
 // start와 end가 같을 때
-console.log(`// start와 end가 같을 때`);
+console.log(`// start와 end가 같을 때=============`);
 console.time('14th');
 console.log(range(5, 5));
 console.timeEnd('14th');
 
 // start와 end가 같을 때 배열 원소 1개 리턴
-console.log(`// start와 end가 같을 때 배열 원소 1개 리턴`);
+console.log(`// start와 end가 같을 때 배열 원소 1개 리턴==============`);
 console.log(range(5, 5, 0));
 console.log(range(5, 5, -1));
 console.log(range(5, 5, 1));
 
 // 인자가 1개이면서 음수일 때,
-console.log(`// 인자가 1개이면서 음수일 때,`);
+console.log(`// 인자가 1개이면서 음수일 때,===============`);
 console.log(range(-5));
 
 // interval이 적절하지 않을 때,
-console.log(`// interval이 적절하지 않을 때,`);
+console.log(`// interval이 적절하지 않을 때,================`);
 console.log(range(5, 1, 1));
 console.log(range(1, 5, -1));
 console.log(range(1, 5, 6));
@@ -141,3 +138,5 @@ console.log(range(0, -3));
 console.log(range(-3, 0));
 console.log(range(2, 1, -5));
 console.log(range(0, -1, -5));
+console.log(range(-5, -1, 3));
+console.log(range(-2, -7, -2));
