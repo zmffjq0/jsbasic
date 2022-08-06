@@ -12,11 +12,11 @@ function powSqrtByForOf(arr) {
 }
 
 function powSqrtByForEach(arr) {
-  const powArr = [];
-  const sqrtArr = [];
-  arr.forEach((el) => {
-    powArr.push(el ** 2);
-    sqrtArr.push(el ** 0.5);
+  const powArr = new Array(arr.length).fill(0);
+  const sqrtArr = new Array(arr.length).fill(0);
+  arr.forEach((el, idx) => {
+    powArr[idx] = el ** 2;
+    sqrtArr[idx] = el ** 0.5;
   });
   return [powArr, sqrtArr];
 }
@@ -28,7 +28,7 @@ function powSqrtByMap(arr) {
     powArr.push(el ** 2);
     sqrtArr.push(el ** 0.5);
   });
-  return [powArr, sqrtArr];
+  return [arr.map((a) => a ** 2), arr.map((a) => a ** 0.5)];
 }
 
 // [[1, 16, 81], [1, 2, 3]]

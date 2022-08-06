@@ -8,6 +8,8 @@ assertArray(shift(arr), [2, 3, 4]); // [8, 0, 1, 2]
 assertArray(shift(arr, 2), [3, 4]); // [1, 2]
 console.log(arr); // [1, 2, 3, 4]
 
+//////////////////////////////////
+
 function push(arr, ...args) {
   return [...arr, ...args];
 }
@@ -31,6 +33,8 @@ function shift(arr, cnt = 1) {
   }
   return arr.filter((_, idx) => idx >= cnt);
 }
+
+///////////////////
 
 function assertArray(arr, expArr) {
   if (arr.length !== expArr.length) {

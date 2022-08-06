@@ -1,12 +1,6 @@
 const arr = [1, 2, 3, 4];
 
-function deleteArray(arr, start, end) {
-  if (end <= start) {
-    console.log('Error!');
-    return;
-  }
-  end = end ?? arr.length;
-
+function deleteArray(arr, start, end = arr.length) {
   return arr.filter((_, idx) => !(start <= idx && idx < end));
 }
 
@@ -22,13 +16,24 @@ const users = [
   { id: 3, name: 'Lee' },
 ];
 
+/**
+ *
+ * @param {*} objArr
+ * @param {*} key
+ * @param {*} value
+ * @returns
+ */
 function deleteObjectArray(objArr, key, value) {
   const res = deepCopyObject(objArr);
-  return typeof key === 'number'
-    ? res.filter((_, idx) => idx !== key)
-    : res.filter((el) => el[key] !== value);
+  const isIndex = typeof key === 'number';
+  return res.filter((el, idx) => (isIndex ? idx !== key : el[key] !== value));
 }
 
+/**
+ *
+ * @param {*} obj
+ * @returns
+ */
 function deepCopyObject(obj) {
   const res = [];
   for (let i in obj) {
@@ -44,4 +49,3 @@ function deepCopyObject(obj) {
 console.log(deleteObjectArray(users, 2)); // Hong, Kim
 console.log(deleteObjectArray(users, 'id', 2)); // Hong, Lee
 console.log(deleteObjectArray(users, 'name', 'Lee')); // Hong, Kim
-console.log(users);
