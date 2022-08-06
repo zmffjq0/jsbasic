@@ -17,17 +17,19 @@ function pop(arr, cnt = 1) {
     console.log('Empty Array!');
     return;
   }
-  return arr.filter((el, idx) => idx < arr.length - cnt);
+  return arr.filter((_, idx) => idx < arr.length - cnt);
 }
+
 function unshift(arr, ...args) {
   return [...args, ...arr];
 }
+
 function shift(arr, cnt = 1) {
   if (arr.length < cnt) {
     console.log('Empty Array!');
     return;
   }
-  return arr.filter((el, idx) => idx >= cnt);
+  return arr.filter((_, idx) => idx >= cnt);
 }
 
 function assertArray(arr, expArr) {

@@ -5,8 +5,8 @@ function powSqrtByForOf(arr) {
   const sqrtArr = [];
 
   for (let el of arr) {
-    powArr.push(el * el);
-    sqrtArr.push(Math.sqrt(el));
+    powArr.push(el ** 2);
+    sqrtArr.push(el ** 0.5);
   }
   return [powArr, sqrtArr];
 }
@@ -15,8 +15,8 @@ function powSqrtByForEach(arr) {
   const powArr = [];
   const sqrtArr = [];
   arr.forEach((el) => {
-    powArr.push(el * el);
-    sqrtArr.push(Math.sqrt(el));
+    powArr.push(el ** 2);
+    sqrtArr.push(el ** 0.5);
   });
   return [powArr, sqrtArr];
 }
@@ -25,8 +25,8 @@ function powSqrtByMap(arr) {
   const powArr = [];
   const sqrtArr = [];
   arr.map((el) => {
-    powArr.push(el * el);
-    sqrtArr.push(Math.sqrt(el));
+    powArr.push(el ** 2);
+    sqrtArr.push(el ** 0.5);
   });
   return [powArr, sqrtArr];
 }
