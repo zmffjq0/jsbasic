@@ -24,6 +24,9 @@ function makeReverseArray(args) {
   console.log(arr);
 }
 
+const makeReverseArray2 = (arr) =>
+  arr.map((el, idx) => arr[arr.length - 1 - idx]);
+
 const all1 = [6, 7, 8, 9, 10];
 const all2 = [1, 2, 3, 4, 5, 6];
 const all3 = [1];
@@ -31,6 +34,7 @@ const all3 = [1];
 // 순수함수 all 변함 없음
 makeReverseArray(all1);
 console.log(all1);
+console.log(makeReverseArray2(all1));
 
 // 비순수함수 all 값 변경
 reverseArray(all2);
