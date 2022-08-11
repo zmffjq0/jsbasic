@@ -38,6 +38,13 @@ console.log(
   )
 );
 
+const pow1 = (a) => a ** 2;
+const pow2 = (a) => a ** 0.5;
+const pow3 = (a) => a ** 3;
+const ax = [pow1, pow2, pow3].reduce((ret, fn) => ret.map((el) => fn(el)), arr);
+
+console.log(ax);
+
 // callback(accumulator, currentvalue, [currentIndex, [array)
 // 배열의 각 요소에 대해 실행할 함수. 다음 네 가지 인수를 받습니다.
 //////- accumulator

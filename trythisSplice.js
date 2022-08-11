@@ -31,3 +31,9 @@ console.log(a2);
 console.log(a3);
 console.log(a4);
 console.log(a5);
+
+const splice2 = (arr, idx, delCnt = arr.length - 1, ...insertions) => [
+  ...arr.slice(0, idx),
+  ...insertions,
+  ...arr.slice(idx + delCnt),
+];
