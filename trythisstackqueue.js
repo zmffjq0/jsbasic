@@ -17,58 +17,115 @@
 // if (!stack.isEmpty()) stack.clear();
 // if (queue.length) queue.clear();
 
+/**
+ * protected 변수 _ (언더바) 사용하기
+ */
+
 class Common {
-  clear() {}
-  isEmpty() {}
-  peek() {}
-  toArray() {}
+  // #arr
+  constructor(arr = []) {
+    this._arr = arr;
+  }
+  // get _arr(){
+  //   return this.#arr;
+  // => 부모의 private 변수를 상속해주었을 때 그냥 변수로 넘어감
+  // }
+
+  get peek() {}
   print() {}
-  length() {}
+
+  clear() {
+    this._arr.length = 0;
+  }
+  get isEmpty() {
+    return !this.length;
+  }
+  toArray() {
+    return Array.from(this._arr);
+  }
+  get length() {
+    return this._arr.length;
+  }
 }
 
-class Stack {
-  stack = [];
-  constructor(args) {
-    this.stack = [...args];
+class Stack extends Common {
+  constructor(arr) {
+    super(arr);
   }
   push(number) {
-    this.stack = [...this.stack, number];
+    /**
+     *
+     */
+    this._arr = [...this._arr, number];
   }
   pop() {
-    const len = this.stack.length;
-    const res = this.stack[len - 1];
-    this.stack = this.stack.slice(0, len - 1);
+    if (this.length === 0) {
+      throw new Error('Empty!');
+      return;
+    }
+    const len = this.length;
+    const res = this._arr[len - 1];
+    // this._arr = this._arr.slice(0, len - 1);
+    this._arr.length--;
     return res;
+  }
+  get peek() {
+    return this._arr[this.length - 1];
+  }
+  print() {
+    if (this.length === 0) {
+      console.log('Empty!!');
+      return;
+    }
+    console.log(...[...this._arr].reverse());
   }
 }
 
-class Queue {
-  queue = [];
-  constructor(args) {
-    this.queue = [...args];
+class Queue extends Common {
+  constructor(arr) {
+    super(arr);
   }
   enqueue(number) {
-    this.queue = [...this.queue, number];
+    this._arr = [...this._arr, number];
   }
   dequeue() {
-    const len = this.queue.length;
-    const res = this.queue[0];
-    this.queue = this.queue.slice(1, len);
+    if (this._arr.length <= 0) {
+      throw new Error('Empty!');
+    }
+    const len = this.length;
+    const res = this._arr[0];
+    // this._arr = this._arr.slice(1, len);
+    this._arr.length--;
     return res;
+  }
+  get peek() {
+    return this._arr[0];
+  }
+  print() {
+    if (this.length === 0) {
+      console.log('Empty!!');
+      return;
+    }
+    console.log(...[...this._arr]);
   }
 }
 
-const stack = new Stack([2, 3, 4]);
+const stack = new Stack([2, 3, 4, 7, 8, 9]);
+const queue = new Queue([2, 3, 4, 6, 3, 1]);
 
-console.log(stack.pop());
-console.log(stack.pop());
-console.log(stack.pop());
+const stack1 = new Stack();
 
-const queue = new Queue([2, 3, 4]);
+console.log(stack.isEmpty);
+stack.print();
+console.log(stack.peek);
+console.log(queue.isEmpty);
+queue.print();
 
-queue.enqueue(3);
-console.log(queue.queue);
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
-console.log(queue.dequeue());
+stack.print();
+stack.clear();
+stack.print();
+stack.push(1);
+stack.print();
+
+stack1.push(3);
+console.log(stack1.pop());
