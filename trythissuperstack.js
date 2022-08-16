@@ -46,6 +46,7 @@ class Queue extends SuperStackQ {
     this._arr.push(num);
     return this;
   }
+  getArr() {}
   dequeue() {
     return this._arr.shift();
   }
