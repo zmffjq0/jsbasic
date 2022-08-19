@@ -51,46 +51,23 @@ const subwayLineTwo = [
     '까치산',
   ]),
 ];
-class SubwayRoute {
-  [Symbol.iterator]() {
-    let idx = subwayLineTwo.indexOf(this.start);
-    let end = this.end;
-    return {
-      next() {
-        idx = idx % subwayLineTwo.length;
-        return {
-          value: subwayLineTwo[idx++],
-          done: subwayLineTwo[idx - 1] === end,
-        };
-      },
-    };
-  }
+
+class Subway {
   constructor(start, end) {
     this.start = start;
     this.end = end;
   }
-}
 
-const sr = new SubwayRoute('문래', '신림');
-// for (const el of sr) {
-//   console.log(el);
-// }
+  [Symbol.iterator]() {
+    let idx = subwayLineTwo[this.start - 1];
+    const end = this.end;
 
-const it = sr[Symbol.iterator]();
-while (true) {
-  const x = it.next();
-  //   console.log(x);
-  console.log(x.value);
-  if (x.done) break;
-}
-
-console.log('================================================');
-
-const sr2 = new SubwayRoute('구로디지털단지', '성수');
-const it2 = sr2[Symbol.iterator]();
-while (true) {
-  const x = it2.next();
-  // console.log(x);
-  console.log(x.value);
-  if (x.done) break;
+    return {
+      next: () => {
+        const done = subwayLineTwo[idx] === this.end;
+        idx = idx === subwayLineTwo.length - 1 ? 0 : idx;
+        return { value: subwayLineTwo[idx], done };
+      },
+    };
+  }
 }

@@ -1,9 +1,21 @@
 class Collection {
   #arr;
+  // [Symbol.iterator]() {
+  //   return this.constructor.name === 'Stack'
+  //     ? this.#arr.reverse().values()
+  //     : this.#arr.values();
+  // }
   [Symbol.iterator]() {
-    return this.constructor.name === 'Stack'
-      ? this.#arr.reverse().values()
-      : this.#arr.values();
+    let idx = -1;
+    // let done = false;
+    return {
+      next: () => {
+        idx += 1;
+        // done ||= idx >= this.length; // node -v 15 이상
+        // done = !this.#arr[idx];
+        return { value: this.#arr[idx], done: !this.#arr[idx] };
+      },
+    };
   }
   constructor(...args) {
     // this.#arr = Array.isArray(args[0]) ? args[0] : [...args];
@@ -43,6 +55,10 @@ class Collection {
     }
     console.log(this.#arr);
   }
+
+  iterator() {
+    return this[Symbol.iterator]();
+  }
 }
 
 class Stack extends Collection {
@@ -77,10 +93,18 @@ class Queue extends Collection {
 
 const st = new Stack([1, 2, 3, 4, 5]);
 const qu = new Queue([1, 2, 3, 4, 5]);
-for (const el of st) {
-  console.log(el);
-}
+// for (const el of st) {
+//   console.log(el);
+// }
 
-for (const el of qu) {
-  console.log(el);
+// for (const el of qu) {
+//   console.log(el);
+// }
+
+const it = st.iterator();
+while (true) {
+  const x = it.next();
+  console.log(x);
+  // console.log(x.value);
+  if (x.done) break;
 }

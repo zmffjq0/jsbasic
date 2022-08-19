@@ -11,7 +11,7 @@ function* calc() {
   return a + b;
 }
 
-const it = calc(1, 2);
+const it = calc();
 console.log(it.next());
 console.log(it.next(1));
 console.log(it.next(2));
