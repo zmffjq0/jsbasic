@@ -17,6 +17,11 @@
 
 class Collection {
   #arr;
+  *[Symbol.iterator]() {
+    for (let idx = 0; idx < this.length; idx++) {
+      yield this.#arr[idx];
+    }
+  }
   constructor(arr) {
     // this.#arr = Array.isArray(args[0]) ? args[0] : [...args];
     this.#arr = arr;
@@ -79,16 +84,42 @@ class ArrayList extends Collection {
   }
 
   static arrayToList(arr, idx) {
-    if (idx >= arr.length - 1) {
-      return {
-        value: arr[idx],
-      };
-    } else {
-      return {
-        value: arr[idx],
-        rest: ArrayList.arrayToList(arr, idx + 1),
-      };
-    }
+    // if (idx >= arr.length - 1) {
+    //   return {
+    //     value: arr[idx],
+    //   };
+    // } else {
+    //   return {
+    //     value: arr[idx],
+    //     rest: ArrayList.arrayToList(arr, idx + 1),
+    //   };
+    // }
+    //********************************** */
+    // if (arr.length === 0) return;
+    // return {
+    //   value: arr[0],
+    //   rest: ArrayList.arrayToList(arr.slice(1)),
+    // };
+    //********************************** */
+    // return arr.reduceRight((prev, curr, i) => {
+    //   return {
+    //     value: curr,
+    //     rest: prev.value ? prev : undefined,
+    //   };
+    // }, {}); //undefined, {}
+    //********************************** */
+    return arr.reduceRight(
+      (prev, curr) => ({ value: curr, rest: prev }),
+      undefined
+    ); //undefined, {}
+    //********************************** */
+    // return (function getResult(i = 0) {
+    //   if (i === arr.length) return;
+    //   return {
+    //     value: arr[i],
+    //     rest: getResult(i + 1),
+    //   };
+    // })();
   }
 
   static listToArray(obj, newArr) {
@@ -135,8 +166,8 @@ class ArrayList extends Collection {
     super.print(() => {
       // console.log(JSON.stringify(ArrayList.arrayToList(this._arr, 0)));
       Array.isArray(this._arr)
-        ? console.log(...this._arr)
-        : console.log(JSON.stringify(this._arr));
+        ? console.log('arraylist =========>', ...this._arr)
+        : console.log('arraylist =========>', JSON.stringify(this._arr));
     });
   }
   set(idx, value) {
@@ -243,29 +274,37 @@ class ArrayList extends Collection {
     return this[Symbol.iterator]();
   }
 }
-
+const alist2 = new ArrayList([1, 2, 3, 4, 5]);
+console.log(JSON.stringify(ArrayList.arrayToList(alist2._arr), null, 2));
+return;
 const alist = new ArrayList({
   value: 1,
   rest: {
     value: 2,
   },
 });
-alist.add(3); // { value: 1, rest: { value: 2, rest: { value: 3 } } }
-alist.remove(2); // { value: 1, rest: { value: 3 } }
-alist.add(22, 1); // { value: 1, rest: { value: 22, rest: { value: 3 } } }
+alist.add(3);
+alist.print();
+alist.remove(2);
+alist.print();
+alist.add(22, 1);
+alist.print();
 alist.add(33, 2);
-alist.print(); // ArrayList(4) { value: 1, rest: { value: 33, rest: { value: 22, rest: { value: 3 } } } }
-alist.set(1, 300); // { value: 1, rest: { value: 300, rest: { value: 22, rest: { value: 3 } } } }
-console.log(alist.get(2));
-console.log(alist.size()); // 22, 4
-console.log(alist.indexOf(300)); // 1
-console.log(alist.contains(300));
-console.log(alist.contains(301)); // true, false
-console.log('is Empty => ', alist.isEmpty);
-console.log(alist.peek); // false, 3
-console.clear();
-console.log(alist.toArray()); // [1, 300, 22, 3]
-console.log(JSON.stringify(alist._arr));
+alist.print();
+alist.set(1, 300);
+alist.print();
+console.log('alist.get(2) =====================>', alist.get(2));
+alist.print();
+console.log('alist.size() =====================>', alist.size());
+alist.print();
+console.log('alist.indexOf(300) =====================>', alist.indexOf(300)); // 1
+alist.print();
+console.log('alist.contains(300) =====================>', alist.contains(300));
+alist.print();
+console.log('alist.contains(301) =====================>', alist.contains(301));
+console.log('alist.isEmpty =====================>', alist.isEmpty);
+console.log('alist.peek =====================>', alist.peek); // false, 3
+console.log('alist.toArray() =====================>', alist.toArray()); // [1, 300, 22, 3]
 console.log('iter start*****************');
 const it = alist.iterator();
 while (true) {
@@ -276,12 +315,6 @@ while (true) {
 }
 console.log(ArrayList.listToArray(alist._arr, []));
 console.log('iter start*****************');
-return;
-console.log(alist._arr);
-alist.clear(); // all clear
-console.log(alist._arr);
-alist.print();
-
 console.log('End!!!!!!!!!!!!!!________________+++++++++++++++++++');
 
 // const alist2 = new ArrayList([1, 2, 3, 4, 5]);
