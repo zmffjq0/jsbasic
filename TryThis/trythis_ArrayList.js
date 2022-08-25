@@ -108,10 +108,10 @@ class ArrayList extends Collection {
     //   };
     // }, {}); //undefined, {}
     //********************************** */
-    return arr.reduceRight(
-      (prev, curr) => ({ value: curr, rest: prev }),
-      undefined
-    ); //undefined, {}
+    // return arr.reduceRight(
+    //   (prev, curr) => ({ value: curr, rest: prev }),
+    //   undefined
+    // ); //undefined, {}
     //********************************** */
     // return (function getResult(i = 0) {
     //   if (i === arr.length) return;
@@ -120,6 +120,12 @@ class ArrayList extends Collection {
     //     rest: getResult(i + 1),
     //   };
     // })();
+    //********************************** */
+    let node;
+    for (let i = arr.length - 1; i >= 0; i--) {
+      node = { value: arr[i], rest: node };
+    }
+    return node;
   }
 
   static listToArray(obj, newArr) {
