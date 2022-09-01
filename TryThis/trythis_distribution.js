@@ -3,14 +3,16 @@ function rand(start, end) {
 }
 
 const res = new Object();
-console.log(res);
 
-for (let i = 0; i < 100_000_000; i++) {
-  if (Number.isNaN(res[rand(100, 200)])) {
-    res[rand(100, 200)] = 1;
-  } else {
-    res[rand(100, 200)] += 1;
-  }
+const start = 300;
+const end = 1000;
+
+for (let i = 0; i < 10_000_000; i++) {
+  const r = rand(start, end);
+  res[r] = (res[r] ?? 0) + 1;
 }
-console.log(res);
+
+const entries = Object.entries(res).sort((a, b) => b[1] - a[1]);
+console.log(entries);
 console.log('end!!!!!');
+console.log(entries, entries[0][1] - entries[end - start][1]);

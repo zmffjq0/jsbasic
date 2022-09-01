@@ -55,11 +55,41 @@ function updateDay(e) {
     const span = document.querySelector(`span#${id}`);
     const idx = id.substr(4);
     span.innerText = getNextWeek(idx, e);
+    console.log('!!!!!!!!!!');
   }
 }
+const debounce = (callback, delay) => {
+  let timer;
+  return (...args) => {
+    timer && clearTimeout(timer);
+    timer = setTimeout(callback, delay, ...args);
+  };
+};
+
+const throttle = (callback, delay) => {
+  let timer;
+  return (...args) => {
+    if (timer) return;
+    timer = setTimeout(
+      () => {
+        callback(...args);
+        timer = null;
+      },
+      delay,
+      ...args
+    );
+  };
+};
 
 list.addEventListener('click', (e) => {
-  updateDay(e);
+  const debounceAct = debounce(updateDay, 1000);
+  const throttleAct = throttle(updateDay, 1000);
+
+  if (e.target === document.querySelector('.addDay#list0')) {
+    debounceAct(e);
+  } else {
+    throttleAct(e);
+  }
 });
 
 addBtn.addEventListener('click', () => {
