@@ -5,3 +5,5 @@ function rand(start, end) {
 for (let i = 0; i < 100; i++) {
   console.log(rand(5, 80));
 }
+
+console.log('test2');
