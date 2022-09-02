@@ -5,7 +5,7 @@ let fn;
     return privateUser;
   };
 }
-
+console.log('안녕');
 const hong = fn();
 hong.age = 30;
 console.log(hong);
