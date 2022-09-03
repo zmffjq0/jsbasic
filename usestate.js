@@ -56,3 +56,4 @@ const [num, setNum] = useState(10);
 console.log(num());
 setNum(20);
 console.log(num());
+console.log(num());
